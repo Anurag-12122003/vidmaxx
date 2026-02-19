@@ -17,8 +17,8 @@ export default async function DashboardPage() {
 
     const { data: existingUser, error: fetchError } = await supabase
         .from('users')
-        .select('id')
-        .eq('id', user.id)
+        .select('user_id')
+        .eq('user_id', user.id)
         .single()
 
     if (fetchError && fetchError.code !== 'PGRST116') {
@@ -31,10 +31,11 @@ export default async function DashboardPage() {
 
         if (email) {
             console.log('User not found in Supabase. Attempting to sync...')
+            console.log('Syncing params:', { user_id: user.id, email, name: fullName })
             const { success, error } = await syncUserToSupabase({
-                id: user.id,
+                user_id: user.id,
                 email: email,
-                full_name: fullName
+                name: fullName
             })
 
             if (!success) {

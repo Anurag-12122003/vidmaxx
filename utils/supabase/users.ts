@@ -9,6 +9,7 @@ export interface UserData {
 export async function syncUserToSupabase(user: UserData) {
     const supabase = createAdminClient()
 
+    console.log('syncUserToSupabase received:', user)
     console.log(`Syncing user ${user.user_id} to Supabase...`)
 
     const { error } = await supabase
