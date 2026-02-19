@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Clapperboard } from "lucide-react";
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 export function Navbar() {
     return (
@@ -30,16 +31,26 @@ export function Navbar() {
 
                 <div className="flex items-center gap-4">
                     <ModeToggle />
-                    <Link href="/login">
-                        <Button variant="ghost" size="sm">
-                            Log in
-                        </Button>
-                    </Link>
-                    <Link href="/signup">
-                        <Button size="sm" className="bg-primary hover:bg-primary/90">
-                            Get Started
-                        </Button>
-                    </Link>
+
+                    <SignedIn>
+                        <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors mr-2">
+                            Dashboard
+                        </Link>
+                        <UserButton afterSignOutUrl="/" />
+                    </SignedIn>
+
+                    <SignedOut>
+                        <SignInButton mode="modal">
+                            <Button variant="ghost" size="sm">
+                                Log in
+                            </Button>
+                        </SignInButton>
+                        <Link href="/sign-up">
+                            <Button size="sm" className="bg-primary hover:bg-primary/90">
+                                Get Started
+                            </Button>
+                        </Link>
+                    </SignedOut>
                 </div>
             </div>
         </nav>

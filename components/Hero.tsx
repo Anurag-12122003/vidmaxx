@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play, Sparkles } from "lucide-react";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 export function Hero() {
     return (
@@ -28,11 +29,21 @@ export function Hero() {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20">
-                    <Link href="/signup">
-                        <Button size="lg" className="h-12 px-8 text-base bg-primary hover:bg-primary/90 rounded-full shadow-lg shadow-primary/25">
-                            Start Creating for Free <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </Link>
+                    <SignedIn>
+                        <Link href="/dashboard">
+                            <Button size="lg" className="h-12 px-8 text-base bg-primary hover:bg-primary/90 rounded-full shadow-lg shadow-primary/25">
+                                Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+                            </Button>
+                        </Link>
+                    </SignedIn>
+                    <SignedOut>
+                        <SignInButton mode="modal">
+                            <Button size="lg" className="h-12 px-8 text-base bg-primary hover:bg-primary/90 rounded-full shadow-lg shadow-primary/25">
+                                Start Creating for Free <ArrowRight className="ml-2 h-4 w-4" />
+                            </Button>
+                        </SignInButton>
+                    </SignedOut>
+
                     <Link href="#demo">
                         <Button variant="outline" size="lg" className="h-12 px-8 text-base rounded-full backdrop-blur-sm bg-background/50">
                             <Play className="mr-2 h-4 w-4" /> Watch Demo
