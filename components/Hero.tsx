@@ -38,8 +38,8 @@ export function Hero() {
                     </SignedIn>
                     <SignedOut>
                         <SignInButton mode="modal">
-                            <Button size="lg" className="h-12 px-8 text-base bg-primary hover:bg-primary/90 rounded-full shadow-lg shadow-primary/25" asChild>
-                                <span>Start Creating for Free <ArrowRight className="ml-2 h-4 w-4 inline-block" /></span>
+                            <Button size="lg" className="h-12 px-8 text-base bg-primary hover:bg-primary/90 rounded-full shadow-lg shadow-primary/25">
+                                Start Creating for Free <ArrowRight className="ml-2 h-4 w-4 inline-block" />
                             </Button>
                         </SignInButton>
                     </SignedOut>
