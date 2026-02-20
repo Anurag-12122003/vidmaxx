@@ -49,7 +49,7 @@ export default async function DashboardPage() {
     }
 
     return (
-        <div className="min-h-screen pt-24 px-4 container mx-auto">
+        <div className="w-full max-w-6xl mx-auto">
             <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
             <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
                 <h2 className="text-xl font-semibold mb-4">Welcome back, {user.firstName}!</h2>
