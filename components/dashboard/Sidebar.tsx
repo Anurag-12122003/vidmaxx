@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Clapperboard, Layers, Video, Book, CreditCard, Settings, Zap, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,9 +19,14 @@ export function Sidebar() {
             </div>
 
             <div className="p-4">
-                <Button className="w-full bg-primary hover:bg-primary/90 text-md py-6" size="lg">
-                    + Create a new series
-                </Button>
+                <Link href="/dashboard/create" className="block w-full">
+                    <Button
+                        className="w-full bg-primary hover:bg-primary/90 text-md py-6"
+                        size="lg"
+                    >
+                        + Create a new series
+                    </Button>
+                </Link>
             </div>
 
             <div className="flex-1 overflow-y-auto py-2 px-3 flex flex-col gap-1">

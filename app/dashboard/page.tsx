@@ -49,29 +49,6 @@ export default async function DashboardPage() {
     }
 
     return (
-        <div className="w-full max-w-6xl mx-auto">
-            <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-            <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
-                <h2 className="text-xl font-semibold mb-4">Welcome back, {user.firstName}!</h2>
-                <p className="text-muted-foreground">
-                    This is your protected dashboard. Here you can start creating AI videos.
-                </p>
-
-                <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 border rounded-lg bg-background/50 hover:border-primary/50 transition-colors cursor-pointer">
-                        <h3 className="font-medium mb-2">Create New Project</h3>
-                        <p className="text-sm text-muted-foreground">Start a new video from scratch or use AI.</p>
-                    </div>
-                    <div className="p-6 border rounded-lg bg-background/50 hover:border-primary/50 transition-colors cursor-pointer">
-                        <h3 className="font-medium mb-2">My Projects</h3>
-                        <p className="text-sm text-muted-foreground">View and edit your existing videos.</p>
-                    </div>
-                    <div className="p-6 border rounded-lg bg-background/50 hover:border-primary/50 transition-colors cursor-pointer">
-                        <h3 className="font-medium mb-2">Schedule</h3>
-                        <p className="text-sm text-muted-foreground">Manage your content calendar.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div className=""></div>
     )
 }

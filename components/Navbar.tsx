@@ -33,7 +33,7 @@ export function Navbar() {
                     <ModeToggle />
 
                     <SignedIn>
-                        <Link href="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors mr-2">
+                        <Link href="/dashboard" className="text-sm font-medium text-primary hover:text-muted-foreground transition-colors mr-2">
                             Dashboard
                         </Link>
                         <UserButton afterSignOutUrl="/" />
@@ -41,8 +41,8 @@ export function Navbar() {
 
                     <SignedOut>
                         <SignInButton mode="modal">
-                            <Button variant="ghost" size="sm" asChild>
-                                <span>Log in</span>
+                            <Button variant="ghost" size="sm">
+                                Log in
                             </Button>
                         </SignInButton>
                         <Link href="/sign-up">
