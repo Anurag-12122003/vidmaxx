@@ -15,11 +15,11 @@ export async function syncUserToSupabase(user: UserData) {
     const { error } = await supabase
         .from('users')
         .upsert({
-            user_id: user.user_id,
+            id: user.user_id,
             email: user.email,
-            name: user.name,
+            full_name: user.name,
             // Removing updated_at for now as it doesn't exist in the initial schema
-        }, { onConflict: 'user_id' })
+        }, { onConflict: 'id' })
 
     if (error) {
         console.error('Error syncing user to Supabase:', error)

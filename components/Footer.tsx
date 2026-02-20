@@ -77,7 +77,7 @@ export function Footer() {
                 {/* Bottom Section */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-border/40">
                     <div className="text-sm text-muted-foreground mb-4 md:mb-0 text-center md:text-left">
-                        <p>© {new Date().getFullYear()} VidMaxx Inc. All rights reserved.</p>
+                        <p suppressHydrationWarning>© {new Date().getFullYear()} VidMaxx Inc. All rights reserved.</p>
                         <p className="text-xs mt-1">Made with ❤️ for creators worldwide.</p>
                     </div>
 

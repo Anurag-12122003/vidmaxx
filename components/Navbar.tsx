@@ -41,8 +41,8 @@ export function Navbar() {
 
                     <SignedOut>
                         <SignInButton mode="modal">
-                            <Button variant="ghost" size="sm">
-                                Log in
+                            <Button variant="ghost" size="sm" asChild>
+                                <span>Log in</span>
                             </Button>
                         </SignInButton>
                         <Link href="/sign-up">
