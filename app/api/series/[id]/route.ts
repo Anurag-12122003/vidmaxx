@@ -1,6 +1,7 @@
 ﻿import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { DeepgramVoices, FonadalabVoices, Language } from "@/utils/constants/voices";
 
 export async function DELETE(
     req: Request,
@@ -65,13 +66,28 @@ export async function PATCH(
             updatePayload.platforms = body.seriesDetails.platforms;
             updatePayload.schedule_time = body.seriesDetails.scheduleTime;
             updatePayload.niche = body.niche;
-            updatePayload.language = body.language;
             updatePayload.voice = body.voice;
+
+            if (body.language) {
+                updatePayload.model_lan_code = body.language;
+                const matchedLangObj = Language.find(l => l.modelLangCode === body.language);
+                if (matchedLangObj) {
+                    updatePayload.language = matchedLangObj.language;
+                }
+            }
             updatePayload.bg_music = body.bgMusic;
             updatePayload.image_style = body.imageStyle;
             updatePayload.caption_style = body.captionStyle;
-        }
 
+            // Derive model_name from voice configuration constants automatically if voice exists
+            if (body.voice) {
+                const allVoices = [...DeepgramVoices, ...FonadalabVoices];
+                const selectedVoiceObj = allVoices.find(v => v.modelName === body.voice);
+                if (selectedVoiceObj) {
+                    updatePayload.model_name = selectedVoiceObj.model;
+                }
+            }
+        }
         // Update the series status, ensuring the user owns it
         const { error, data } = await supabase
             .from("series")

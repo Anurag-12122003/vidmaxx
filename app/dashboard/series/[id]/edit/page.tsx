@@ -2,6 +2,7 @@ import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import { createAdminClient } from '@/utils/supabase/admin'
 import { SeriesFormWizard } from '@/components/dashboard/create/SeriesFormWizard'
+import { Language } from '@/utils/constants/voices'
 
 export default async function EditSeriesPage({ params }: { params: Promise<{ id: string }> }) {
     const user = await currentUser()
@@ -27,9 +28,12 @@ export default async function EditSeriesPage({ params }: { params: Promise<{ id:
     }
 
     // Transform Supabase snake_case schema back into the form's nested data structure
+    const dbLang = seriesData.language || 'en';
+    const matchedLanguage = Language.find(l => l.modelLangCode.startsWith(dbLang))?.modelLangCode || dbLang;
+
     const initialData = {
         niche: seriesData.niche,
-        language: seriesData.language,
+        language: matchedLanguage,
         voice: seriesData.voice,
         bgMusic: seriesData.bg_music || [],
         imageStyle: seriesData.image_style,
