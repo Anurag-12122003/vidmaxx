@@ -36,7 +36,7 @@ export function FormFooter({
                 disabled={disableNext}
                 variant={disableNext ? "secondary" : "default"}
             >
-                {isFinalStep ? "Schedule" : "Continue"}
+                {isFinalStep && disableNext ? "Scheduling..." : isFinalStep ? "Schedule" : "Continue"}
             </Button>
         </div>
     );
