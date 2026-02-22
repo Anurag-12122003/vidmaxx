@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import { createAdminClient } from "@/utils/supabase/admin";
+import { DeepgramVoices, FonadalabVoices, Language } from "@/utils/constants/voices";
 
 export async function POST(req: Request) {
     try {
@@ -27,6 +28,16 @@ export async function POST(req: Request) {
 
         const supabase = createAdminClient();
 
+        // Derive the model_name corresponding to the selected voice
+        const allVoices = [...DeepgramVoices, ...FonadalabVoices];
+        const selectedVoiceObj = allVoices.find(v => v.modelName === body.voice);
+        const derivedModel = selectedVoiceObj ? selectedVoiceObj.model : null;
+
+        // Derive the true language name (e.g., "Hindi") from the stored code (e.g., "hi-IN")
+        const langCode = body.language || "en-US";
+        const matchedLangObj = Language.find(l => l.modelLangCode === langCode);
+        const languageName = matchedLangObj ? matchedLangObj.language : "English";
+
         // Map the incoming payload to the Supabase SQL schema natively
         const { error } = await supabase.from("series").insert([
             {
@@ -36,11 +47,13 @@ export async function POST(req: Request) {
                 platforms: body.seriesDetails.platforms,
                 schedule_time: body.seriesDetails.scheduleTime,
                 niche: body.niche,
-                language: body.language,
+                model_lan_code: langCode,
+                language: languageName,
                 voice: body.voice,
                 bg_music: body.bgMusic,
                 image_style: body.imageStyle,
                 caption_style: body.captionStyle,
+                model_name: derivedModel,
                 status: 'active'
             }
         ]);

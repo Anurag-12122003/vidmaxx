@@ -109,13 +109,29 @@ export function SeriesCard({ series: initialSeries, onDeleteSuccess }: SeriesCar
     };
 
     const handleViewVideos = () => {
-        alert("Video Gallery Coming Soon!");
-        // router.push(`/dashboard/series/${series.id}/videos`);
+        router.push(`/dashboard/videos`);
     };
 
-    const handleGenerateVideo = () => {
-        alert("Video Generation Trigger Coming Soon!");
-        // router.push(`/dashboard/series/${series.id}/generate`);
+    const handleGenerateVideo = async () => {
+        setIsLoading(true);
+        try {
+            const res = await fetch("/api/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ seriesId: series.id }),
+            });
+            if (res.ok) {
+                // Immediately route to the videos page so they can watch the "Generating..." skeleton
+                router.push(`/dashboard/videos`);
+            } else {
+                alert("Failed to start video generation.");
+            }
+        } catch (error) {
+            console.error("Error triggering video generation:", error);
+            alert("An error occurred while starting generation.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -154,6 +170,7 @@ export function SeriesCard({ series: initialSeries, onDeleteSuccess }: SeriesCar
                             No Platform
                         </span>
                     )}
+                    <span className="px-2 py-0.5 rounded bg-white/60 backdrop-blur-md border border-white/20 text-[9px] font-bold text-black tracking-wider">{series.video_duration} sec</span>
                 </div>
                 {/* Top Right Edit Button overlay */}
                 <button
@@ -224,7 +241,7 @@ export function SeriesCard({ series: initialSeries, onDeleteSuccess }: SeriesCar
                     {/* Secondary Link to Past Videos */}
                     <Button
                         variant="outline"
-                        onClick={() => alert("Video Gallery Coming Soon!")}
+                        onClick={handleViewVideos}
                         className="flex-1 gap-2 font-semibold h-[42px] rounded-xl border-border hover:bg-muted/50 transition-colors shadow-sm"
                     >
                         <Video className="w-4 h-4" />
@@ -233,7 +250,8 @@ export function SeriesCard({ series: initialSeries, onDeleteSuccess }: SeriesCar
 
                     {/* Primary Generation Button */}
                     <Button
-                        onClick={() => alert("Video Generation Trigger Coming Soon!")}
+                        onClick={handleGenerateVideo}
+                        disabled={isLoading}
                         className="flex-1 gap-1.5 font-semibold h-[42px] bg-primary hover:bg-primary/90 text-primary-foreground transition-opacity rounded-xl cursor-pointer shadow-sm"
                     >
                         <Zap className="w-4 h-4 fill-current" />

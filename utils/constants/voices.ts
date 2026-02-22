@@ -114,25 +114,25 @@ export const DeepgramVoices = [
 export const FonadalabVoices = [
     {
         "model": "fonadalab",
-        "modelName": "vanee",
+        "modelName": "Vaanee",
         "preview": "fonadalab-Vaanee.mp3",
         "gender": "female"
     },
     {
         "model": "fonadalab",
-        "modelName": "chitraa",
+        "modelName": "Chaitra",
         "preview": "fonadalab-Chaitra.mp3",
         "gender": "female"
     },
     {
         "model": "fonadalab",
-        "modelName": "meghra",
+        "modelName": "Meghra",
         "preview": "fonadalab-Meghra.mp3",
         "gender": "male"
     },
     {
         "model": "fonadalab",
-        "modelName": "nirvani",
+        "modelName": "Swarini",
         "preview": "fonadalab-Nirvani.mp3",
         "gender": "female"
     }
